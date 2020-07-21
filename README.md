@@ -3,9 +3,9 @@ Compatible with clients that support [Namecheaps DDNS API](https://www.namecheap
 
 In DDClient:  
 Service: Namecheap  
-Username: domene.shop token  
-Password: domene.shop secret  
+Username: Domeneshop API token  
+Password: Domeneshop API secret  
 Server: nc2ds.gbt.cc
 
-Use at your own risk, log contains credentials. For self hosting, see http://github.com/sjefen6/nc2ds/.  
-For more information on domene.shops API see https://api.domeneshop.no/docs/. To get your token and secret, visit: https://www.domeneshop.no/admin?view=api.
+Use https://nc2ds.gbt.cc at your own risk, log contains credentials and support might end abruptly. For self hosting, see http://github.com/sjefen6/nc2ds/.  
+For more information on Domeneshop API see https://api.domeneshop.no/docs/. To get your token and secret, visit: https://www.domeneshop.no/admin?view=api.

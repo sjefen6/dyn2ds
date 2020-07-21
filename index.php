@@ -12,12 +12,11 @@ if(isset($_GET["path"]) && $_GET["path"] == "update"){
   $path = "/v0/dyndns/update?hostname=" . $_GET["host"] . "&myip=" . $ip;
   $remote_url = "https://" . $server . $path;
 
-  // Create a stream
   $opts = array(
     'http'=>array(
       'method'=>"GET",
       'header' => "Authorization: Basic " . base64_encode($_GET["domain"] . ":" . $_GET["password"]) . "\r\n" .
-      "User-Agent: NC2DS.GBT.CC - namecheap to domene.shop translator for DDClient. Contact me(at)gbt.cc\r\n"
+      "User-Agent: NC2DS.GBT.CC - namecheap to Domeneshop API translator for DDClient. Contact me(at)gbt.cc\r\n"
     )
   );
 
@@ -38,10 +37,10 @@ if(isset($_GET["path"]) && $_GET["path"] == "update"){
   echo "<p>Compatible with clients that support <a target=\"_blank\" href=\"https://www.namecheap.com/support/knowledgebase/article.aspx/29/11/how-do-i-use-a-browser-to-dynamically-update-the-hosts-ip\">Namecheaps DDNS API</a>.</p>";
   echo "<p>In DDClient:<br>";
   echo "Service: Namecheap<br>";
-  echo "Username: domene.shop token<br>";
-  echo "Password: domene.shop secret<br>";
+  echo "Username: Domeneshop API token<br>";
+  echo "Password: Domeneshop API secret<br>";
   echo "Server: nc2ds.gbt.cc</p>";
-  echo "<p>Use at your own risk, log contains credentials. For self hosting, see <a target=\"_blank\" href=\"http://github.com/sjefen6/nc2ds/\">http://github.com/sjefen6/nc2ds/</a>.<br>";
-  echo "For more information on domene.shops API see <a target=\"_blank\" href=\"https://api.domeneshop.no/docs/\">https://api.domeneshop.no/docs/</a>. To get your token and secret, visit: <a target=\"_blank\" href=\"https://www.domeneshop.no/admin?view=api\">https://www.domeneshop.no/admin?view=api</a>.</p>";
+  echo "<p>Use <a href=\"https://nc2ds.gbt.cc\">https://nc2ds.gbt.cc</a> at your own risk, log contains credentials and support might end abruptly. For self hosting, see <a target=\"_blank\" href=\"http://github.com/sjefen6/nc2ds/\">http://github.com/sjefen6/nc2ds/</a>.<br>";
+  echo "For more information on Domeneshop API see <a target=\"_blank\" href=\"https://api.domeneshop.no/docs/\">https://api.domeneshop.no/docs/</a>. To get your token and secret, visit: <a target=\"_blank\" href=\"https://www.domeneshop.no/admin?view=api\">https://www.domeneshop.no/admin?view=api</a>.</p>";
 }
 ?>
