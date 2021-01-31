@@ -2,12 +2,20 @@
 // Example request:
 // https://a:b@dyn2ds.gbt.cc/nic/update?hostname=example.com&myip=127.0.0.1
 
+// Keyword for ignoring the myip parameter
+$ignoreip = "!ignoreip";
+
 // Check if this is an DDNS client, or a user looking for information
 if(isset($_GET["path"]) && $_GET["path"] == "nic/update"){
   // Set the source ip-address
   $ip = $_SERVER['REMOTE_ADDR'];
-  // IF the client provided an ip, lets use that instead
-  if(!empty($_GET["myip"])){
+
+  // Lets check if the myip parameter should be ignored
+  if(substr_compare($_SERVER['PHP_AUTH_USER'], $ignoreip, -strlen($ignoreip)) === 0){
+    $user = substr($_SERVER['PHP_AUTH_USER'], 0 , -strlen($ignoreip));
+    $auth = $user . ":" . $_SERVER['PHP_AUTH_PW'];
+    $_SERVER['HTTP_AUTHORIZATION'] = "Basic " . base64_encode($auth);
+  } elseif(!empty($_GET["myip"])){ // If it should not be ignored, lets check if it was sent
     $ip = $_GET["myip"];
   }
 
@@ -56,14 +64,15 @@ if(isset($_GET["path"]) && $_GET["path"] == "nic/update"){
   }
 } else {
   // Explanation to users
-  echo "<h1>DDNS translator for Domeneshop API</h1><br>";
+  echo "<h1>DDNS translator for Domeneshop API</h1>";
   echo "<p>Compatible with clients that support <a target=\"_blank\" href=\"https://help.dyn.com/remote-access-api/\">Dyn.com DDNS API</a>.</p>";
   echo "<p>In DDClient:<br>";
   echo "Service: dyndns<br>";
   echo "Username: Domeneshop API token<br>";
   echo "Password: Domeneshop API secret<br>";
   echo "Server: dyn2ds.gbt.cc</p>";
-  echo "<p>Use <a href=\"https://dyn2ds.gbt.cc\">https://dyn2ds.gbt.cc</a> at your own risk, log contains credentials and support might end abruptly. For self hosting, see <a target=\"_blank\" href=\"http://github.com/sjefen6/dyn2ds/\">http://github.com/sjefen6/dyn2ds/</a>.<br>";
+  echo "<p>To make the translator ignore the ip-address sent by the client (for example if you have double nat-ed unifi usg), end the username with " . $ignoreip . ".<br>";
+  echo "Use <a href=\"https://dyn2ds.gbt.cc\">https://dyn2ds.gbt.cc</a> at your own risk, log contains credentials and support might end abruptly. For self hosting, see <a target=\"_blank\" href=\"http://github.com/sjefen6/dyn2ds/\">http://github.com/sjefen6/dyn2ds/</a>.<br>";
   echo "For more information on Domeneshop API see <a target=\"_blank\" href=\"https://api.domeneshop.no/docs/\">https://api.domeneshop.no/docs/</a>. To get your token and secret, visit: <a target=\"_blank\" href=\"https://www.domeneshop.no/admin?view=api\">https://www.domeneshop.no/admin?view=api</a>.</p>";
 }
 ?>
